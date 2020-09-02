@@ -4,24 +4,33 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "persons")
-class Person(
+class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    var id: Int? = null
 
     @Column(nullable = false, length = 80)
-    val name: String,
+    var name: String? = null
 
     @Column
-    val age: Int?,
+    var age: Int? = null
 
     @Column
-    val address: String?,
+    var address: String? = null
 
     @Column
-    val work: String?
-) {
+    var work: String? = null
+
+    constructor()
+
+    constructor(name: String, age: Int?, address: String?, work: String?) {
+        this.name = name
+        this.age = age
+        this.address = address
+        this.work = work
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -1,6 +1,9 @@
 package ru.romanow.inst.web
 
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import ru.romanow.inst.model.PersonRequest
 import ru.romanow.inst.service.PersonService
 import javax.validation.Valid
@@ -18,11 +21,22 @@ class PersonController(
     fun listPersons() = personService.getPersons()
 
     @PostMapping
-    fun createPerson(@Valid @RequestBody request: PersonRequest) = personService.createPerson(request)
+    fun createPerson(@Valid @RequestBody request: PersonRequest): ResponseEntity<Void> {
+        val id = personService.createPerson(request)
+        return ResponseEntity.created(
+            ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri()
+        ).build()
+    }
 
     @PatchMapping("/{id}")
-    fun editPerson(@PathVariable id: Int, @Valid @RequestBody request: PersonRequest) = personService.editPerson(id, request)
+    fun editPerson(@PathVariable id: Int, @Valid @RequestBody request: PersonRequest) =
+        personService.editPerson(id, request)
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     fun editPerson(@PathVariable id: Int) = personService.deletePerson(id)
 }
