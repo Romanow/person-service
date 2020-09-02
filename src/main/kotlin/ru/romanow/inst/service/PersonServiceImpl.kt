@@ -3,7 +3,6 @@ package ru.romanow.inst.service
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.romanow.inst.domain.Person
-import ru.romanow.inst.exceptions.PersonAlreadyExists
 import ru.romanow.inst.model.PersonRequest
 import ru.romanow.inst.model.PersonResponse
 import ru.romanow.inst.repository.PersonRepository
@@ -27,9 +26,6 @@ class PersonServiceImpl(
 
     @Transactional
     override fun createPerson(request: PersonRequest): Int {
-        if (personRepository.findByName(request.name).isPresent) {
-            throw PersonAlreadyExists("Person ${request.name} already exists")
-        }
         val person = Person(
             name = request.name,
             age = request.age,
