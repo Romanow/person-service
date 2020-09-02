@@ -31,6 +31,10 @@ class Person {
         this.work = work
     }
 
+    constructor(id: Int, name: String, age: Int?, address: String?, work: String?) : this(name, age, address, work) {
+        this.id = id
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
