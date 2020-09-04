@@ -9,7 +9,7 @@ plugins {
 }
 
 ext {
-    openApiVersion = "1.4.4"
+    openApiVersion = "1.4.5"
 }
 
 sourceCompatibility = 1.11
@@ -34,7 +34,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.postgresql:postgresql"
 
-    implementation "org.springdoc:springdoc-openapi-webmvc-core:${openApiVersion}"
+    implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
+    implementation "org.springdoc:springdoc-openapi-kotlin:${openApiVersion}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin"

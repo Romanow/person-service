@@ -1,6 +1,7 @@
 package ru.romanow.inst.web
 
-import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -14,13 +15,13 @@ class PersonController(
     private val personService: PersonService
 ) {
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
     fun getPerson(@PathVariable id: Int) = personService.getPerson(id)
 
-    @GetMapping
+    @GetMapping(produces = [APPLICATION_JSON_VALUE])
     fun listPersons() = personService.getPersons()
 
-    @PostMapping
+    @PostMapping(consumes = [APPLICATION_JSON_VALUE])
     fun createPerson(@Valid @RequestBody request: PersonRequest): ResponseEntity<Void> {
         val id = personService.createPerson(request)
         return ResponseEntity.created(
@@ -32,7 +33,7 @@ class PersonController(
         ).build()
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
     fun editPerson(@PathVariable id: Int, @Valid @RequestBody request: PersonRequest) =
         personService.editPerson(id, request)
 
