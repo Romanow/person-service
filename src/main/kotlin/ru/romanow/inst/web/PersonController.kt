@@ -36,7 +36,6 @@ class PersonController(
     fun editPerson(@PathVariable id: Int, @Valid @RequestBody request: PersonRequest) =
         personService.editPerson(id, request)
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     fun editPerson(@PathVariable id: Int) = personService.deletePerson(id)
 }
