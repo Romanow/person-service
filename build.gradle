@@ -4,29 +4,23 @@ plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.0"
     id "org.jetbrains.kotlin.plugin.jpa" version "1.4.0"
     id "org.jetbrains.kotlin.plugin.spring" version "1.4.0"
-    id "org.springframework.boot" version "2.3.0.RELEASE"
+    id "org.springframework.boot" version "2.5.0"
     id "io.spring.dependency-management" version "1.0.9.RELEASE"
+    id "com.gorylenko.gradle-git-properties" version "2.3.1"
 }
 
 ext {
-    openApiVersion = "1.4.5"
+    openApiVersion = "1.5.9"
 }
 
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
 
-idea {
-    module {
-        downloadJavadoc = true
-        downloadSources = true
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
-[ compileKotlin, compileTestKotlin ]*.kotlinOptions*.jvmTarget = "11"
+[compileKotlin, compileTestKotlin]*.kotlinOptions *.jvmTarget = "11"
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
@@ -34,8 +28,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.postgresql:postgresql"
 
-    implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
-    implementation "org.springdoc:springdoc-openapi-kotlin:${openApiVersion}"
+    implementation "org.springdoc:springdoc-openapi-ui:$openApiVersion"
+    implementation "org.springdoc:springdoc-openapi-kotlin:$openApiVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
@@ -48,10 +42,9 @@ test {
     useJUnitPlatform()
 }
 
-springBoot {
-    buildInfo()
-}
-
 bootJar {
     archiveFileName = "${project.name}.jar"
+    layered {
+        enabled = true
+    }
 }
