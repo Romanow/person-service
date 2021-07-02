@@ -3,12 +3,14 @@ package ru.romanow.inst.service
 import org.apache.commons.lang3.RandomStringUtils.randomAlphabetic
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.romanow.inst.domain.Person
 import ru.romanow.inst.model.PersonRequest
+import ru.romanow.inst.model.events.PersonChangedEvent
+import ru.romanow.inst.model.events.PersonCreatedEvent
+import ru.romanow.inst.model.events.PersonRemovedEvent
 import ru.romanow.inst.repository.PersonRepository
 import java.util.Optional.of
 import kotlin.random.Random.Default.nextInt
@@ -21,19 +23,18 @@ internal class PersonServiceTest {
 
     private val personRepository: PersonRepository = mock(PersonRepository::class.java)
     private val notificationService: NotificationService = mock(NotificationService::class.java)
-    // private val notificationService: NotificationService = LogNotificationService()
     private val personService: PersonService = PersonServiceImpl(personRepository, notificationService)
 
     @Test
     fun getPerson() {
-        // Given
+        // given
         val person = buildPerson(PERSON_ID)
         `when`(personRepository.findById(PERSON_ID)).thenReturn(of(person))
 
-        // When
+        // when
         val response = personService.getPerson(PERSON_ID)
 
-        // Than
+        // than
         assertThat(response)
             .usingRecursiveComparison()
             .isEqualTo(person)
@@ -41,11 +42,29 @@ internal class PersonServiceTest {
 
     @Test
     fun getPersons() {
+        // given
+        val persons = listOf(
+            buildPerson(PERSON_ID),
+            buildPerson(PERSON_ID + 1),
+            buildPerson(PERSON_ID + 2)
+        )
+        `when`(personRepository.findAll()).thenReturn(persons)
+
+        // when
+        val response = personService.getPersons()
+
+        // than
+        assertThat(persons).hasSameSizeAs(persons)
+        for (item in response) {
+            assertThat(item)
+                .usingRecursiveComparison()
+                .isEqualTo(persons.find { it.id == item.id })
+        }
     }
 
     @Test
     fun createPerson() {
-        // Given
+        // given
         val request = PersonRequest(
             name = randomAlphabetic(8),
             age = nextInt(18, 60),
@@ -62,16 +81,17 @@ internal class PersonServiceTest {
         )
         `when`(personRepository.save(any(Person::class.java))).thenReturn(person)
 
-        // When
+        // when
         val response = personService.createPerson(request)
 
-        // Than
+        // than
         assertThat(response).isEqualTo(PERSON_ID)
+        verify(notificationService, times(1)).notify(any(PersonCreatedEvent::class.java))
     }
 
     @Test
     fun editPerson() {
-        // Given
+        // given
         val person = buildPerson(PERSON_ID)
         `when`(personRepository.findById(PERSON_ID)).thenReturn(of(person))
         val request = PersonRequest(name = randomAlphabetic(8), address = randomAlphabetic(12))
@@ -79,24 +99,26 @@ internal class PersonServiceTest {
         person.address = request.address
         `when`(personRepository.save(eq(person))).thenReturn(person)
 
-        // When
+        // when
         val response = personService.editPerson(PERSON_ID, request)
 
-        // Than
+        // than
         assertThat(response)
             .usingRecursiveComparison()
             .isEqualTo(person)
+        verify(notificationService, times(1)).notify(any(PersonChangedEvent::class.java))
     }
 
     @Test
     fun deletePerson() {
-        // Given
+        // given
         doNothing().`when`(personRepository).deleteById(PERSON_ID)
 
-        // When
+        // when
         personService.deletePerson(PERSON_ID)
 
-        // Than
+        // than
+        verify(notificationService, times(1)).notify(any(PersonRemovedEvent::class.java))
     }
 
     private fun buildPerson(id: Int) =

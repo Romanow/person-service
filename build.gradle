@@ -6,7 +6,6 @@ plugins {
     id "org.jetbrains.kotlin.plugin.spring" version "1.4.0"
     id "org.springframework.boot" version "2.5.0"
     id "io.spring.dependency-management" version "1.0.9.RELEASE"
-    id "com.gorylenko.gradle-git-properties" version "2.3.1"
 }
 
 ext {
@@ -36,6 +35,8 @@ dependencies {
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.apache.commons:commons-lang3"
+    testImplementation "org.mockito:mockito-inline"
+
 }
 
 test {
