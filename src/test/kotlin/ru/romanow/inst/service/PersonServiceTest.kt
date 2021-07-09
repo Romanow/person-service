@@ -2,6 +2,7 @@ package ru.romanow.inst.service
 
 import org.apache.commons.lang3.RandomStringUtils.randomAlphabetic
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
@@ -27,6 +28,7 @@ internal class PersonServiceTest {
     private val personService: PersonService = PersonServiceImpl(personRepository, notificationService)
 
     @Test
+    @DisplayName("given: person in DB; when: find person by ID; then: return person")
     fun getPerson() {
         // given
         val person = buildPerson(PERSON_ID)
@@ -55,7 +57,7 @@ internal class PersonServiceTest {
         val response = personService.getPersons()
 
         // than
-        assertThat(persons).hasSameSizeAs(persons)
+        assertThat(response).hasSameSizeAs(persons)
         for (item in response) {
             assertThat(item)
                 .usingRecursiveComparison()
@@ -80,14 +82,15 @@ internal class PersonServiceTest {
             work = request.work,
             age = request.age
         )
-        `when`(personRepository.save(any(Person::class.java))).thenReturn(person)
+        `when`(personRepository.save(any(Person::class.java)))
+            .thenReturn(person)
 
         // when
         val response = personService.createPerson(request)
 
         // than
         assertThat(response).isEqualTo(PERSON_ID)
-        verify(notificationService, times(1)).notify(any(PersonCreatedEvent::class.java))
+        verify(notificationService, times(1)).notify(this.any(PersonCreatedEvent::class.java))
     }
 
     @Test
@@ -107,7 +110,7 @@ internal class PersonServiceTest {
         assertThat(response)
             .usingRecursiveComparison()
             .isEqualTo(person)
-        verify(notificationService, times(1)).notify(any(PersonChangedEvent::class.java))
+        verify(notificationService, times(1)).notify(this.any(PersonChangedEvent::class.java))
     }
 
     @Test
