@@ -1,5 +1,6 @@
 package ru.romanow.inst.web
 
+import io.swagger.v3.oas.annotations.Hidden
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.validation.FieldError
@@ -8,19 +9,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import ru.romanow.inst.model.ErrorResponse
-import ru.romanow.inst.model.ErrorValidationResponse
+import ru.romanow.inst.model.ValidationErrorResponse
 import javax.persistence.EntityNotFoundException
 
+@Hidden
 @RestControllerAdvice
 class ErrorController {
     private val logger = LoggerFactory.getLogger(ErrorController::class.java)
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun badRequest(exception: MethodArgumentNotValidException): ErrorValidationResponse {
+    fun badRequest(exception: MethodArgumentNotValidException): ValidationErrorResponse {
         val validationErrors = prepareValidationErrors(exception.bindingResult.fieldErrors)
         logger.info("Bad Request '{}'", validationErrors)
-        return ErrorValidationResponse("Validation failed", validationErrors)
+        return ValidationErrorResponse("Validation failed", validationErrors)
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
