@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "audit.user.mail",
+      "type": "java.lang.String",
+      "description": "EMail address for audit messages."
+    }
+  ]
+}

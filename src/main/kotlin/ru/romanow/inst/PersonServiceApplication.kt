@@ -1,9 +1,9 @@
 package ru.romanow.inst
 
 import org.springframework.boot.SpringApplication
-import org.springframework.boot.autoconfigure.SpringBootApplication as SpringBootApplication1
+import org.springframework.boot.autoconfigure.SpringBootApplication
 
-@SpringBootApplication1
+@SpringBootApplication
 class PersonServiceApplication
 
 fun main(args: Array<String>) {

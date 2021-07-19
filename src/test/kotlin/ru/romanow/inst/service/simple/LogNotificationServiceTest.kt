@@ -1,16 +1,8 @@
-package ru.romanow.inst.service
+package ru.romanow.inst.service.simple
 
-import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.mockito.ArgumentMatchers
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import org.slf4j.Logger
@@ -19,6 +11,7 @@ import ru.romanow.inst.model.events.PersonChangedEvent
 import ru.romanow.inst.model.events.PersonCreatedEvent
 import ru.romanow.inst.model.events.PersonEvent
 import ru.romanow.inst.model.events.PersonRemovedEvent
+import ru.romanow.inst.service.LogNotificationService
 import java.util.stream.Stream
 
 @ExtendWith(MockitoExtension::class)
@@ -33,7 +26,7 @@ internal class LogNotificationServiceTest {
                 .thenReturn(logger)
 
             LogNotificationService().notify(event)
-            verify(logger, times(1)).info(anyString(), eq(event.eventType), eq(event.changedFields))
+            verify(logger, times(1)).info("Event: ${event.eventType}, changed fields ${event.changedFields}")
         }
     }
 

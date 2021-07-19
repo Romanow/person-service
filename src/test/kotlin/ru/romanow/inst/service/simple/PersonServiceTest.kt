@@ -1,4 +1,4 @@
-package ru.romanow.inst.service
+package ru.romanow.inst.service.simple
 
 import org.apache.commons.lang3.RandomStringUtils.randomAlphabetic
 import org.assertj.core.api.Assertions.assertThat
@@ -14,6 +14,9 @@ import ru.romanow.inst.model.events.PersonChangedEvent
 import ru.romanow.inst.model.events.PersonCreatedEvent
 import ru.romanow.inst.model.events.PersonRemovedEvent
 import ru.romanow.inst.repository.PersonRepository
+import ru.romanow.inst.service.NotificationService
+import ru.romanow.inst.service.PersonService
+import ru.romanow.inst.service.PersonServiceImpl
 import java.util.Optional.of
 import kotlin.random.Random.Default.nextInt
 
