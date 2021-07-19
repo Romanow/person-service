@@ -1,6 +1,6 @@
 package ru.romanow.inst.model
 
-data class ErrorValidationResponse(
+data class ValidationErrorResponse(
     override var message: String?,
     var errors: Map<String, String>?
 ) : ErrorResponse(message)
