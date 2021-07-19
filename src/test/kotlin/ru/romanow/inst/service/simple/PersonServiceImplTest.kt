@@ -21,7 +21,7 @@ import java.util.Optional.of
 import kotlin.random.Random.Default.nextInt
 
 @ExtendWith(MockitoExtension::class)
-internal class PersonServiceTest {
+internal class PersonServiceImplTest {
     companion object {
         private const val PERSON_ID = 100
     }

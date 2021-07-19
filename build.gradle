@@ -10,6 +10,7 @@ plugins {
 
 ext {
     openApiVersion = "1.5.9"
+    postgresContainerVersion = "1.15.2"
 }
 
 sourceCompatibility = 1.11
@@ -44,6 +45,7 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.apache.commons:commons-lang3"
     testImplementation "org.mockito:mockito-inline"
+    testImplementation "org.testcontainers:postgresql:$postgresContainerVersion"
 }
 
 test {

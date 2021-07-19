@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig
 import ru.romanow.inst.model.events.PersonChangedEvent
 import ru.romanow.inst.model.events.PersonCreatedEvent
 import ru.romanow.inst.model.events.PersonEvent
