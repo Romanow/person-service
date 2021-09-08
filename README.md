@@ -27,6 +27,8 @@
 * Приложение должно содержать 4-5 unit-тестов на реализованные операции.
 * Деплой на Heroku реализовать средствами GitHub Actions. Для деплоя нельзя использовать Heroku CLI или webhooks.
 * Приложение должно использовать БД для хранения записей.
+* Приложение должно быть завернуто в Docker.
+* Деплой на Heroku реализовать через docker.
 * После успешного деплоя на Heroku, через newman запускаются интеграционные тесты. Интеграционные тесты можно проверить локально,
   для этого нужно импортировать в Postman коллекцию [lab1.postman_collection.json](postman/%5Binst%5D%20Lab1.postman_collection.json)]) и
   environment [[local] lab1.postman_environment.json](postman/%5Binst%5D%5Blocal%5D%20Lab1.postman_environment.json).
