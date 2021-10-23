@@ -7,12 +7,13 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.context.annotation.Import
+import org.springframework.test.context.ContextConfiguration
+import ru.romanow.inst.config.DatabaseTestConfiguration
 import ru.romanow.inst.domain.Person
 import java.util.stream.Stream
 
 @DataJpaTest(properties = ["logging.level.org.testcontainers=debug"])
-@Import(DatabaseTestConfiguration::class)
+@ContextConfiguration(classes = [DatabaseTestConfiguration::class])
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 internal class PersonRepositoryTest {
 

@@ -1,16 +1,17 @@
-package ru.romanow.inst.repository
+package ru.romanow.inst.config
 
 import com.zaxxer.hikari.HikariDataSource
 import org.postgresql.Driver
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.DependsOn
 import org.springframework.context.annotation.Primary
 import org.testcontainers.containers.PostgreSQLContainer
 
 @TestConfiguration
 class DatabaseTestConfiguration {
-    @Bean
+    @Bean(destroyMethod = "close")
     fun postgres(): PostgreSQLContainer<*> {
         val postgres = PostgreSQLContainer<PostgreSQLContainer<*>>(POSTGRES_IMAGE)
             .withUsername(USERNAME)
