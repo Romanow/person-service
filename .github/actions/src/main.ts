@@ -1,10 +1,10 @@
 import {Auth, google} from "googleapis"
-import core from "@actions/core"
+import {getInput} from "@actions/core"
 
 const sheets = google.sheets("v4")
 
-const sheetId = core.getInput("sheet_id")
-const googleApiKey = JSON.parse(core.getInput("token"))
+const sheetId = getInput("sheet_id")
+const googleApiKey = JSON.parse(getInput("token"))
 
 const range = "B80:B80"
 
