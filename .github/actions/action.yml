@@ -18,7 +18,7 @@ inputs:
   mark:
     description: "Отметка"
     required: false
-    default: "'*"
+    default: "'+"
   column_offset:
     description: "Базовое смещение колонки"
     required: false

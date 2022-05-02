@@ -10,11 +10,6 @@ const GITHUB_USER = "github_user"
 const HOMEWORK_NUMBER = "homework_number"
 const MARK = "mark"
 
-const getOrDefault = (name: string, defaultValue: string | number): string | number => {
-    let input = getInput(name)
-    return input ? input : defaultValue
-}
-
 const equalsIgnoreCase = (a: string, b: string) => _.eq(a.toLocaleLowerCase(), b.toLocaleLowerCase())
 
 const updateCell = async (sheetId: string, range: string, mark: string, credentials: Auth.JWT) => {
@@ -28,8 +23,11 @@ const updateCell = async (sheetId: string, range: string, mark: string, credenti
                 values: [[mark]]
             }
         })
-        .then(r => r.data)
-        .catch(e => setFailed(e.message))
+        .then(response => response.data)
+        .catch(error => {
+            setFailed(error.message)
+            throw error
+        })
 }
 
 const findRow = async (githubUser: string, columnName: string, sheetId: string, credentials: Auth.JWT) => {
@@ -41,14 +39,18 @@ const findRow = async (githubUser: string, columnName: string, sheetId: string, 
             majorDimension: "COLUMNS",
             valueRenderOption: "FORMATTED_VALUE"
         })
-        .then(r => r.data)
-        .catch(e => setFailed(e.message))
+        .then(response => response.data)
+        .catch(error => {
+            setFailed(error.message)
+            throw error
+        })
 
     const logins = _.get(response, "values[0]")
     const index = _.findIndex(logins, (v: string) => equalsIgnoreCase(v, githubUser))
 
     if (index === -1) {
         setFailed(`User ${githubUser} not found in sheet`)
+        throw new Error(`User ${githubUser} not found in sheet`)
     }
     return index + 1
 }
@@ -57,14 +59,14 @@ const sheets = google.sheets("v4")
 
 const githubUser = getInput(GITHUB_USER, {required: true})
 
-info(`Github user ${githubUser}`)
+info(`Executing for github user ${githubUser}`)
 
 const sheetId = getInput(GOOGLE_SHEET_ID, {required: true})
 const googleApiKey = JSON.parse(getInput(GOOGLE_SERVICE_ACCOUNT, {required: true}))
-const mark = getOrDefault(MARK, "'+") as string
-const homeworkNumber = getOrDefault(HOMEWORK_NUMBER, 1) as number
-const columnOffset = getOrDefault(COLUMN_BASE_OFFSET, "F") as string
-const userColumn = getOrDefault(USER_COLUMN, "D") as string
+const homeworkNumber = Number.parseInt(getInput(HOMEWORK_NUMBER, {required: true}))
+const columnOffset = getInput(COLUMN_BASE_OFFSET)
+const userColumn = getInput(USER_COLUMN)
+const mark = getInput(MARK)
 
 const credentials = new Auth.JWT({
     email: googleApiKey.client_email,
