@@ -7,13 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./.github/actions
-        with:
-          google_token: ${{secrets.GOOGLE_API_KEY}}
-          sheet_id: "1BT5iLgERiWUPPn4gtOQk4KfHjVOTQbUS7ragAJrl6-Q"
-          homework_number: 1
-          mark: "DONE"
-
       - uses: actions/setup-java@v1
         with:
           java-version: 11
@@ -40,3 +33,11 @@ jobs:
           environment: postman/[inst][heroku] Lab1.postman_environment.json
           delayRequest: 50
           reporters: cli
+
+      - name: Github auto grader mark
+        uses: Romanow/google-sheet-autograder-marker@v1.0
+        with:
+          google_token: ${{secrets.GOOGLE_API_KEY}}
+          sheet_id: "1BT5iLgERiWUPPn4gtOQk4KfHjVOTQbUS7ragAJrl6-Q"
+          homework_number: 1
+          mark: "DONE"
