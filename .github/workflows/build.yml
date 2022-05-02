@@ -9,7 +9,7 @@ jobs:
 
       - uses: ./.github/actions
         with:
-          token: ${{secrets.GOOGLE_API_KEY}}
+          google_token: ${{secrets.GOOGLE_API_KEY}}
           sheet_id: "1BT5iLgERiWUPPn4gtOQk4KfHjVOTQbUS7ragAJrl6-Q"
 
       - uses: actions/setup-java@v1
