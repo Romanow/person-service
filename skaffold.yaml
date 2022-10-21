@@ -1,0 +1,22 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: romanowalex/person-service
+build:
+  artifacts:
+  - image: romanowalex/person-service
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  helm:
+    releases:
+      - name: postgres
+        chartPath: ./k8s/postgres
+      - name: service
+        chartPath: ./k8s/service
+        setValues:
+          fqdn: "person-service.local"
+        artifactOverrides:
+          image: romanowalex/person-service
+        imageStrategy:
+          helm: {}

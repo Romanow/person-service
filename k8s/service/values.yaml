@@ -1,0 +1,14 @@
+fqdn: person-service.romanow-alex.ru
+image:
+  repository: romanowalex/person-service
+  tag: v1.0
+
+service:
+  port: 8080
+  profile: k8s
+  requested:
+    memory: 768Mi
+    cpu: 0.5
+  limits:
+    memory: 1024Mi
+    cpu: 0.5
