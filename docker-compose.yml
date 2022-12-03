@@ -14,7 +14,7 @@ services:
       - "5432:5432"
 
   person-service:
-    build: ./person-service
+    build: .
     image: romanowalex/person-service:v1.0
     container_name: person-service
     environment:
