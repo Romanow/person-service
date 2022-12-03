@@ -56,6 +56,8 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/ma
 
 $ echo "127.0.0.1    person-service.local" | sudo tee -a /etc/hosts    
 
+$ helm install postgres k8s/postgres-char
+
 $ skaffold dev
 
 $ curl http://person-service.local/manage/health

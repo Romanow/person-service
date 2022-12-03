@@ -1,9 +1,10 @@
 port: 8080
 profile: k8s
+domain: person-service.romanow-alex.ru
 
 image:
-  name: person-service
-  version: v1.0
+  repository: romanowalex/person-service
+  tag: v1.0
 
 resources:
   requests:

@@ -10,13 +10,13 @@ build:
 deploy:
   helm:
     releases:
-      - name: postgres
-        chartPath: ./k8s/postgres
-      - name: service
-        chartPath: ./k8s/service
+      - name: postgres-chart
+        chartPath: ./k8s/postgres-chart
+      - name: service-chart
+        chartPath: ./k8s/service-chart
         setValues:
-          fqdn: "person-service.local"
+          domain: "person-service.local"
         artifactOverrides:
           image: romanowalex/person-service
         imageStrategy:
-          helm: {}
+          helm: { }

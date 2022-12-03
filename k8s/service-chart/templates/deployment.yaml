@@ -4,9 +4,9 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     app.kubernetes.io/name: {{ .Chart.Name }}
-    app.kubernetes.io/version: "{{ .Values.image.version }}"
+    app.kubernetes.io/version: "{{ .Values.image.tag | substr 0 8 }}"
     app.kubernetes.io/component: application
-    app.kubernetes.io/part-of: micro-services
+    app.kubernetes.io/part-of: person-service
     app.kubernetes.io/managed-by: helm
 spec:
   replicas: 1
@@ -22,15 +22,15 @@ spec:
       labels:
         app: {{ .Chart.Name }}
         app.kubernetes.io/name: {{ .Chart.Name }}
-        app.kubernetes.io/version: "{{ .Values.image.version }}"
+        app.kubernetes.io/version: "{{ .Values.image.tag | substr 0 8 }}"
         app.kubernetes.io/component: application
-        app.kubernetes.io/part-of: micro-services
+        app.kubernetes.io/part-of: person-service
         app.kubernetes.io/managed-by: helm
     spec:
       containers:
         - name: {{ .Chart.Name }}
           imagePullPolicy: Always
-          image: {{ .Values.image.name }}:{{ .Values.image.version }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           resources:
             requests:
               memory: "{{ .Values.resources.requests.memory }}"
