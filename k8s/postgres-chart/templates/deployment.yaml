@@ -26,6 +26,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "postgres:{{ .Values.version }}"
+          imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_USER
               value: {{ .Values.default_database.user }}

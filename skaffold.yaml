@@ -10,9 +10,9 @@ build:
 deploy:
   helm:
     releases:
-      - name: postgres-chart
+      - name: postgres
         chartPath: ./k8s/postgres-chart
-      - name: service-chart
+      - name: service
         chartPath: ./k8s/service-chart
         setValues:
           domain: "person-service.local"
