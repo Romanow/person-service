@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import ru.romanow.inst.model.ErrorResponse
-import ru.romanow.inst.model.ValidationErrorResponse
 import ru.romanow.inst.model.PersonRequest
 import ru.romanow.inst.model.PersonResponse
+import ru.romanow.inst.model.ValidationErrorResponse
 import ru.romanow.inst.service.PersonService
 import javax.validation.Valid
 

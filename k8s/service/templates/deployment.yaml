@@ -1,32 +1,60 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ .Chart.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/version: "{{ .Values.image.version }}"
+    app.kubernetes.io/component: application
+    app.kubernetes.io/part-of: micro-services
+    app.kubernetes.io/managed-by: helm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ .Chart.Name }}
+      app: {{ .Chart.Name }}
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "{{ .Values.metrics.path }}"
+        prometheus.io/port: "{{ .Values.port }}"
       labels:
+        app: {{ .Chart.Name }}
         app.kubernetes.io/name: {{ .Chart.Name }}
-        app.kubernetes.io/version: "{{ .Chart.Version }}"
-        app.kubernetes.io/component: spring
+        app.kubernetes.io/version: "{{ .Values.image.version }}"
+        app.kubernetes.io/component: application
+        app.kubernetes.io/part-of: micro-services
+        app.kubernetes.io/managed-by: helm
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          image: {{ .Values.image.name }}:{{ .Values.image.version }}
           resources:
             requests:
-              memory: {{ .Values.service.requested.memory }}
-              cpu: {{ .Values.service.requested.cpu }}
+              memory: "{{ .Values.resources.requests.memory }}"
+              cpu: "{{ .Values.resources.requests.cpu }}"
             limits:
-              memory: {{ .Values.service.limits.memory }}
-              cpu: {{ .Values.service.limits.cpu }}
+              memory: "{{ .Values.resources.limits.memory }}"
+              cpu: "{{ .Values.resources.limits.cpu }}"
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: {{ .Values.service.profile }}
+              value: "{{ .Values.profile }}"
+          livenessProbe:
+            initialDelaySeconds: 60
+            failureThreshold: 10
+            periodSeconds: 10
+            httpGet:
+              path: /manage/health/liveness
+              port: {{ .Values.port }}
+          readinessProbe:
+            initialDelaySeconds: 60
+            failureThreshold: 10
+            periodSeconds: 10
+            httpGet:
+              path: /manage/health/readiness
+              port: {{ .Values.port }}
           ports:
             - name: web
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.port }}

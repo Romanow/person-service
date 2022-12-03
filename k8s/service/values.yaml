@@ -1,14 +1,19 @@
-fqdn: person-service.romanow-alex.ru
-image:
-  repository: romanowalex/person-service
-  tag: v1.0
+port: 8080
+profile: k8s
 
-service:
-  port: 8080
-  profile: k8s
-  requested:
-    memory: 768Mi
-    cpu: 0.5
-  limits:
+image:
+  name: person-service
+  version: v1.0
+
+resources:
+  requests:
+    cpu: 500m
     memory: 1024Mi
-    cpu: 0.5
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+
+metrics:
+  path: "/manage/prometheus"
+  username: management
+  password: passwd
