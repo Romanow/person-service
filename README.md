@@ -48,15 +48,14 @@ Creating cluster "kind" ...
  ✓ Installing CNI 🔌
  ✓ Installing StorageClass 💾
 Set kubectl context to "kind-kind"
-You can now use your cluster with:
-
-kubectl cluster-info --context kind-kind
 
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+$ kubectl wait --namespace ingress-nginx \
+    --for=condition=ready pod \
+    --selector=app.kubernetes.io/component=controller \
+    --timeout=90s
 
 $ echo "127.0.0.1    person-service.local" | sudo tee -a /etc/hosts    
-
-$ helm install postgres k8s/postgres-char
 
 $ skaffold dev
 
