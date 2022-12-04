@@ -1,8 +1,6 @@
 name: Build project
 on:
-  push:
-    branches:
-      - master
+  push: [ master ]
 jobs:
   build:
     name: Build
@@ -15,8 +13,6 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
           cache: 'gradle'
-
-      - uses: gradle/gradle-build-action@v2
 
       - name: Build project
         run: ./gradlew clean build
