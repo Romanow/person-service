@@ -1,5 +1,7 @@
 # Person Service
 
+[![Build project](https://github.com/Romanow/person-service/actions/workflows/build.yml/badge.svg)](https://github.com/Romanow/person-service/actions/workflows/build.yml)
+
 ### Формулировка
 
 В рамках первой лабораторной работы требуется написать простейшее веб приложение, предоставляющее пользователю набор
