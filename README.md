@@ -1,6 +1,6 @@
 # Person Service
 
-[![Build project](https://github.com/Romanow/person-service/actions/workflows/build.yml/badge.svg)](https://github.com/Romanow/person-service/actions/workflows/build.yml)
+[![Build project](https://github.com/Romanow/person-service/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Romanow/person-service/actions/workflows/build.yml)
 
 ### Формулировка
 
