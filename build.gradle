@@ -75,7 +75,7 @@ checkoutMergeToReleaseBranch {
         var releaseVersion = project.property("release.releaseVersion")
         project.exec {
             executable = "git"
-            args "checkout", "-b", "release/${releaseVersion}"
+            args "checkout", "-B", "release/${releaseVersion}"
         }
     }
 }
