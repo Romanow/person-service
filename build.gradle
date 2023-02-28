@@ -70,7 +70,7 @@ release {
     }
 }
 
-afterReleaseBuild {
+checkoutMergeToReleaseBranch {
     doFirst {
         var releaseVersion = project.property("release.releaseVersion")
         project.exec {
