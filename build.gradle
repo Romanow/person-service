@@ -63,8 +63,9 @@ bootJar {
 }
 
 release {
-    pushReleaseVersionBranch = "release/${version}"
+    var releaseVersion = project.property("release.releaseVersion")
+    pushReleaseVersionBranch = "release/${releaseVersion}"
     git {
-        requireBranch.set("develop")
+        requireBranch.set("release/${releaseVersion}")
     }
 }
