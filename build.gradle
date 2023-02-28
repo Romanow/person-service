@@ -63,18 +63,19 @@ bootJar {
 }
 
 release {
-    pushReleaseVersionBranch = "release/1.1.0"
+    var releaseVersion = project.property("release.releaseVersion")
+    pushReleaseVersionBranch = "release/${releaseVersion}"
     git {
         requireBranch.set("develop")
     }
 }
-//
-//afterReleaseBuild {
-//    doFirst {
-//        var releaseVersion = project.property("release.releaseVersion")
-//        project.exec {
-//            executable = "git"
-//            args "checkout", "-b", "release/${releaseVersion}"
-//        }
-//    }
-//}
+
+afterReleaseBuild {
+    doFirst {
+        var releaseVersion = project.property("release.releaseVersion")
+        project.exec {
+            executable = "git"
+            args "checkout", "-b", "release/${releaseVersion}"
+        }
+    }
+}
