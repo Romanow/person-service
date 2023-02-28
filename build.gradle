@@ -63,6 +63,7 @@ bootJar {
 }
 
 release {
+    pushReleaseVersionBranch = "release/${version}"
     git {
         requireBranch.set("develop")
     }
