@@ -6,6 +6,7 @@ plugins {
     id "org.springframework.boot" version "2.7.4"
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
+    id "net.researchgate.release" version "3.0.2"
 }
 
 ext {
@@ -59,4 +60,10 @@ springBoot {
 
 bootJar {
     archiveFileName = "${project.name}.jar"
+}
+
+release {
+    git {
+        requireBranch.set("develop")
+    }
 }
