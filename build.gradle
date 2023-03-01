@@ -10,7 +10,7 @@ plugins {
 }
 
 ext {
-    openApiVersion = "1.6.12"
+    openApiVersion = "1.6.12-SNAPSHOT"
     postgresContainerVersion = "1.16.0"
 }
 
