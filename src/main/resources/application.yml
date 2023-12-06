@@ -4,6 +4,11 @@ spring:
   application.name: person-service
   profiles.active: locoal
   main.banner-mode: off
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
 
 management:
   endpoint:
