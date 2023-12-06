@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "79fde698-cad9-40c9-a7ba-26519344a053",
-		"name": "[inst] Lab1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
+      "_postman_id": "79fde698-cad9-40c9-a7ba-26519344a053",
+      "name": "Person Service",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
 	"item": [
 		{
 			"name": "Person REST API operations",

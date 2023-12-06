@@ -41,6 +41,7 @@ class ErrorController {
     private fun prepareValidationErrors(errors: List<FieldError>): Map<String, String> {
         return errors.associateBy(
             { err -> err.field },
-            { err -> "Field has wrong value ${err.rejectedValue}: ${err.defaultMessage}" }).toMap()
+            { err -> "Field has wrong value ${err.rejectedValue}: ${err.defaultMessage}" }
+        ).toMap()
     }
 }
