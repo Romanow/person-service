@@ -57,7 +57,7 @@ $ kubectl wait --namespace ingress-nginx \
     --selector=app.kubernetes.io/component=controller \
     --timeout=90s
 
-$ echo "127.0.0.1    person-service.local" | sudo tee -a /etc/hosts    
+$ echo "127.0.0.1    person-service.local" | sudo tee -a /etc/hosts
 
 $ skaffold dev
 

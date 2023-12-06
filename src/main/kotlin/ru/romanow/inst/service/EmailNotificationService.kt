@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 import ru.romanow.inst.model.events.PersonEvent
 
-@Profile("!local")
+@Profile("prod")
 @Service
 class EmailNotificationService(
     private val mailSender: JavaMailSender,

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -17,7 +18,6 @@ import ru.romanow.inst.model.PersonRequest
 import ru.romanow.inst.model.PersonResponse
 import ru.romanow.inst.model.ValidationErrorResponse
 import ru.romanow.inst.service.PersonService
-import javax.validation.Valid
 
 @Tag(name = "Person REST API operations")
 @RestController

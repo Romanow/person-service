@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${DATABASE_HOST:postgres-service}:${DATABASE_PORT:5432}/${DATABASE_NAME:persons}
     username: ${DATABASE_USER:program}
-    password: ${DATABAES_PASSWORD:test}
+    password: ${DATABASE_PASSWORD:test}
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true

@@ -1,14 +1,10 @@
 package ru.romanow.inst.service.simple
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThatNoException
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.mockito.Mockito.mock
-import org.springframework.mail.MailSender
 import org.springframework.mail.javamail.JavaMailSender
 import ru.romanow.inst.model.events.PersonChangedEvent
 import ru.romanow.inst.model.events.PersonCreatedEvent

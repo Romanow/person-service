@@ -40,7 +40,7 @@ internal class PersonServiceImplTest {
         // when
         val response = personService.getPerson(PERSON_ID)
 
-        // than
+        // then
         assertThat(response)
             .usingRecursiveComparison()
             .isEqualTo(person)
@@ -59,7 +59,7 @@ internal class PersonServiceImplTest {
         // when
         val response = personService.getPersons()
 
-        // than
+        // then
         assertThat(response).hasSameSizeAs(persons)
         for (item in response) {
             assertThat(item)
@@ -91,7 +91,7 @@ internal class PersonServiceImplTest {
         // when
         val response = personService.createPerson(request)
 
-        // than
+        // then
         assertThat(response).isEqualTo(PERSON_ID)
         verify(notificationService, times(1)).notify(this.any(PersonCreatedEvent::class.java))
     }
@@ -109,7 +109,7 @@ internal class PersonServiceImplTest {
         // when
         val response = personService.editPerson(PERSON_ID, request)
 
-        // than
+        // then
         assertThat(response)
             .usingRecursiveComparison()
             .isEqualTo(person)
@@ -124,7 +124,7 @@ internal class PersonServiceImplTest {
         // when
         personService.deletePerson(PERSON_ID)
 
-        // than
+        // then
         verify(notificationService, times(1)).notify(this.any(PersonRemovedEvent::class.java))
     }
 

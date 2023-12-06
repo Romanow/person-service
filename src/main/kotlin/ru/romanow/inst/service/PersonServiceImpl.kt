@@ -1,5 +1,6 @@
 package ru.romanow.inst.service
 
+import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.romanow.inst.domain.Person
@@ -10,7 +11,6 @@ import ru.romanow.inst.model.events.PersonCreatedEvent
 import ru.romanow.inst.model.events.PersonRemovedEvent
 import ru.romanow.inst.repository.PersonRepository
 import ru.romanow.inst.service.ReflectionUtils.Companion.getFieldValues
-import javax.persistence.EntityNotFoundException
 
 @Service
 class PersonServiceImpl(
