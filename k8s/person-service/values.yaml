@@ -1,0 +1,17 @@
+image:
+  repository: romanowalex/person-service
+  tag: v1.0
+
+profile: k8s
+
+ingress:
+  enabled: true
+  domain: local
+
+resources:
+  requests:
+    cpu: 0.5
+    memory: 1024Mi
+  limits:
+    cpu: 0.5
+    memory: 1024Mi

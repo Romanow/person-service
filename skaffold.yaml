@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2beta29
+apiVersion: skaffold/v4beta8
 kind: Config
 metadata:
   name: romanowalex/person-service
@@ -11,12 +11,11 @@ deploy:
   helm:
     releases:
       - name: postgres
-        chartPath: ./k8s/postgres-chart
-      - name: service
-        chartPath: ./k8s/service-chart
-        setValues:
-          domain: "person-service.local"
-        artifactOverrides:
-          image: romanowalex/person-service
-        imageStrategy:
-          helm: { }
+        remoteChart: romanow/postgres
+        valuesFiles:
+          - k8s/postgres/values.yaml
+
+      - name: person-service
+        remoteChart: romanow/java-service
+        valuesFiles:
+          - k8s/person-service/values.yaml

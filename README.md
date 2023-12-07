@@ -38,28 +38,4 @@
   пользователь `program:test`.
 * Для сборки используется [GitHub Actions](https://docs.github.com/en/actions).
 
-### Локальный запуск кластера k8s с использованием kind
-
-```shell
-$ kind create cluster --config kind.yml
-Creating cluster "kind" ...
- ✓ Ensuring node image (kindest/node:v1.25.2) 🖼
- ✓ Preparing nodes 📦
- ✓ Writing configuration 📜
- ✓ Starting control-plane 🕹️
- ✓ Installing CNI 🔌
- ✓ Installing StorageClass 💾
-Set kubectl context to "kind-kind"
-
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-$ kubectl wait --namespace ingress-nginx \
-    --for=condition=ready pod \
-    --selector=app.kubernetes.io/component=controller \
-    --timeout=90s
-
-$ echo "127.0.0.1    person-service.local" | sudo tee -a /etc/hosts
-
-$ skaffold dev
-
-$ curl http://person-service.local/manage/health
-```
+[Локальный запуск кластера k8s с использованием kind](k8s/README.md)
