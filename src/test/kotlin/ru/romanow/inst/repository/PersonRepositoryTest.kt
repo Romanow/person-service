@@ -1,6 +1,5 @@
 package ru.romanow.inst.repository
 
-import org.apache.commons.lang3.RandomUtils.nextInt
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -11,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration
 import ru.romanow.inst.config.DatabaseTestConfiguration
 import ru.romanow.inst.domain.Person
 import java.util.stream.Stream
+import kotlin.random.Random.Default.nextInt
 
 @DataJpaTest(properties = ["logging.level.org.testcontainers=debug"])
 @ContextConfiguration(classes = [DatabaseTestConfiguration::class])

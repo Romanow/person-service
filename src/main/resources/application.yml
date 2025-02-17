@@ -1,9 +1,13 @@
 server:
   port: 8080
+
 spring:
-  application.name: person-service
-  profiles.active: locoal
-  main.banner-mode: off
+  application:
+    name: person-service
+  profiles:
+    active: local
+  config:
+    import: optional:git.properties
   jpa:
     open-in-view: false
     generate-ddl: true
@@ -16,10 +20,16 @@ management:
   endpoints:
     web:
       base-path: /manage
-      exposure.include: info,health,loggers
+      exposure.include: info,health,loggers,prometheus
+  metrics.tags:
+    application: ${spring.application.name}
   health.diskspace.enabled: false
   endpoint.health.show-details: always
   info.git.mode: simple
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
   health:
     readinessstate.enabled: true
     livenessstate.enabled: true
@@ -27,5 +37,3 @@ management:
 springdoc:
   api-docs.path: /api-docs
   paths-to-match: /api/**
-  default-consumes-media-type: application/json
-  default-produces-media-type: application/json
