@@ -17,7 +17,7 @@ import java.util.stream.Stream
 
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [LogNotificationServiceTest.TestConfiguration::class])
-//@SpringJUnitConfig(LogNotificationServiceTest.TestConfiguration::class)
+// @SpringJUnitConfig(LogNotificationServiceTest.TestConfiguration::class)
 internal class LogNotificationServiceTest {
     @Autowired
     private lateinit var logNotificationService: LogNotificationService

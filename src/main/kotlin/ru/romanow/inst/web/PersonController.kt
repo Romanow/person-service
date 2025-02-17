@@ -29,8 +29,16 @@ class PersonController(
     @Operation(
         summary = "Информация о человеке",
         responses = [
-            ApiResponse(responseCode = "200", description = "Данные о человеке", content = [Content(schema = Schema(implementation = PersonResponse::class))]),
-            ApiResponse(responseCode = "404", description = "Человек с таким ID не найден", content = [Content(schema = Schema(implementation = ErrorResponse::class))]),
+            ApiResponse(
+                responseCode = "200",
+                description = "Данные о человеке",
+                content = [Content(schema = Schema(implementation = PersonResponse::class))]
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Человек с таким ID не найден",
+                content = [Content(schema = Schema(implementation = ErrorResponse::class))]
+            ),
         ]
     )
     @GetMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
@@ -39,7 +47,11 @@ class PersonController(
     @Operation(
         summary = "Информация по всем людям",
         responses = [
-            ApiResponse(responseCode = "200", description = "Все люди", content = [Content(array = ArraySchema(schema = Schema(implementation = PersonResponse::class)))])
+            ApiResponse(
+                responseCode = "200",
+                description = "Все люди",
+                content = [Content(array = ArraySchema(schema = Schema(implementation = PersonResponse::class)))]
+            )
         ]
     )
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
@@ -48,8 +60,16 @@ class PersonController(
     @Operation(
         summary = "Создание новой записи о человеке",
         responses = [
-            ApiResponse(responseCode = "201", description = "Новая запись успешно создана", headers = [Header(name = "Location", description = "Path to new Person")]),
-            ApiResponse(responseCode = "400", description = "Ошибка входных данных", content = [Content(schema = Schema(implementation = ValidationErrorResponse::class))])
+            ApiResponse(
+                responseCode = "201",
+                description = "Новая запись успешно создана",
+                headers = [Header(name = "Location", description = "Path to new Person")]
+            ),
+            ApiResponse(
+                responseCode = "400",
+                description = "Ошибка входных данных",
+                content = [Content(schema = Schema(implementation = ValidationErrorResponse::class))]
+            )
         ]
     )
     @PostMapping(consumes = [APPLICATION_JSON_VALUE])
@@ -67,9 +87,21 @@ class PersonController(
     @Operation(
         summary = "Обновление существующей записи о человеке",
         responses = [
-            ApiResponse(responseCode = "200", description = "Человек с таким ID успешно обновлен", content = [Content(schema = Schema(implementation = PersonResponse::class))]),
-            ApiResponse(responseCode = "400", description = "Ошибка входных данных", content = [Content(schema = Schema(implementation = ValidationErrorResponse::class))]),
-            ApiResponse(responseCode = "404", description = "Человек с таким ID не найден", content = [Content(schema = Schema(implementation = ErrorResponse::class))])
+            ApiResponse(
+                responseCode = "200",
+                description = "Человек с таким ID успешно обновлен",
+                content = [Content(schema = Schema(implementation = PersonResponse::class))]
+            ),
+            ApiResponse(
+                responseCode = "400",
+                description = "Ошибка входных данных",
+                content = [Content(schema = Schema(implementation = ValidationErrorResponse::class))]
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Человек с таким ID не найден",
+                content = [Content(schema = Schema(implementation = ErrorResponse::class))]
+            )
         ]
     )
     @PatchMapping("/{id}", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])

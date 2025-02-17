@@ -24,7 +24,6 @@ internal class ReflectionUtilsTest {
                 Arguments.of(TestObject("Hello", 10), true, arrayOf("a -> Hello", "b -> 10", "c -> null")),
                 Arguments.of(TestObject("Hello", 10, "Test"), false, arrayOf("a -> Hello", "b -> 10", "c -> Test")),
             )
-
     }
 
     data class TestObject(
