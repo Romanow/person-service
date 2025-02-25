@@ -21,5 +21,8 @@ GitHub: [romanow/person-service](https://github.com/Romanow/person-service).
 Используем [docker-compose.yml](docker-compose.yml)
 
 ```shell
-$ docker compose up -d --wait
+$ docker compose \
+    -f docker-compose.yml \
+    -f docker-compose.frontend.yml \
+    up -d --wait
 ```
