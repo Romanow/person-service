@@ -14,8 +14,6 @@ GitHub: [romanow/person-service](https://github.com/Romanow/person-service).
 * `PATCH /persons/{personId}` – обновление существующей записи о человеке.
 * `DELETE /person/{personId}` – удаление записи о человеке.
 
-[Описание API](person-service.yaml).
-
 ## Локальный запуск
 
 Используем [docker-compose.yml](docker-compose.yml)

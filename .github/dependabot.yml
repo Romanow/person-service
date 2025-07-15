@@ -1,3 +1,4 @@
+---
 version: 2
 updates:
   - package-ecosystem: "gradle"
@@ -5,8 +6,7 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-      - dependency-name: '*'
-        update-types:
-          - version-update:semver-major
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     commit-message:
       prefix: "[deps]"

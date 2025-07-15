@@ -1,5 +1,8 @@
 server:
   port: 8080
+  forward-headers-strategy: framework
+  servlet:
+    context-path: ${APPLICATION_CONTEXT_PATH:/}
 
 spring:
   application:
